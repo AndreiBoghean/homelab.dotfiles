@@ -7,10 +7,8 @@
 
   outputs = { self, nixpkgs, ... }: {
     nixosModules.homelab = { pkgs, lib, ... }: {
-      environment.systemPackages = with pkgs; [
-        lolcat
-      ];
-
+      import ./kubernetes.flake;
+      import ./testFile.flake;
     };
   };
 }
