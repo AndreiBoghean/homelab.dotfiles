@@ -6,9 +6,19 @@
   };
 
   outputs = { self, nixpkgs, ... }: {
+    system = "x86_64-linux";
     nixosModules.homelab = { pkgs, lib, ... }: {
-      import ./kubernetes.flake;
-      import ./testFile.flake;
+      imports = [
+        ./kubernetes.nix
+        ./testFile.nix
+      ];
+
+
+      # environment.systemPackages = with pkgs; [
+      #   cowsay
+      # ];
+      # import ./kubernetes.nix;
+      # import ./testFile.nix;
     };
   };
 }
