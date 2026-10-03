@@ -4,10 +4,8 @@ metadata:
   name: radar
 spec:
   source:
+    repoURL: https://skyhook-io.github.io/helm-charts
     chart: radar
-    helm:
-      version: v2
-    repoURL: skyhook-io.github.io/helm-charts
 
 
 
