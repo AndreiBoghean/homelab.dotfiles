@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: radar
+spec:
+  source:
+    chart: radar
+    helm:
+      version: v2
+    repoURL: skyhook-io.github.io/helm-charts
+
+
+
+
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRoute
+# metadata:
+  # name: argocd-server
+  # namespace: argocd
+# spec:
+  # entryPoints:
+    # - websecure
+  # routes:
+    # - kind: Rule
+      # match: Host(`argocd.andreiboghean.com`)
+      # priority: 10
+      # services:
+        # - name: argocd-server
+          # port: 80
+    # - kind: Rule
+      # match: Host(`argocd.andreiboghean.com`) && Header(`Content-Type`, `application/grpc`)
+      # priority: 11
+      # services:
+        # - name: argocd-server
+          # port: 80
+          # scheme: h2c
+  # tls:
+    # certResolver: default
