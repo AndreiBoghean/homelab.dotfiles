@@ -4,8 +4,7 @@ metadata:
   name: radar
   namespace: argocd
 spec:
-  project:
-    default
+  project: default
   source:
     repoURL: https://skyhook-io.github.io/helm-charts
     targetRevision: 1.15.0
@@ -27,9 +26,11 @@ spec:
   routes:
     - kind: Rule
       match: Host(`radar.andreiboghean.com`)
-       services:
+      services:
         - name: argocd-server
           port: 9280
+  tls:
+    certResolver: default
     # - kind: Rule
       # match: Host(`argocd.andreiboghean.com`) && Header(`Content-Type`, `application/grpc`)
       # priority: 11
@@ -37,5 +38,3 @@ spec:
         # - name: argocd-server
           # port: 80
           # scheme: h2c
-  tls:
-    certResolver: default
