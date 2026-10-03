@@ -1,37 +1,6 @@
 {
   "nodes": {
-    "modules": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1790732587,
-        "narHash": "sha256-XMNmg5hshmAJ50U7x3pmiht1TayKOGdh4Vf3YsTTlhc=",
-        "path": "/homelab/nixos/modules",
-        "type": "path"
-      },
-      "original": {
-        "path": "/homelab/nixos/modules",
-        "type": "path"
-      }
-    },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1790635395,
-        "narHash": "sha256-bNyvoIyOCu7lzoCpWKWGIsHpTtERUWzqYWFPlN++WTw=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "7fc6f2c20af09cdcaf48b92ec3121860139ec668",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-26.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1790635395,
         "narHash": "sha256-bNyvoIyOCu7lzoCpWKWGIsHpTtERUWzqYWFPlN++WTw=",
@@ -49,8 +18,7 @@
     },
     "root": {
       "inputs": {
-        "modules": "modules",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
