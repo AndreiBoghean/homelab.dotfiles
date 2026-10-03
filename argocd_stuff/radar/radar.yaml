@@ -12,6 +12,7 @@ spec:
     chart: radar
   destination:
     server: https://kubernetes.default.svc   
+    namespace: argocd
 
 
 
