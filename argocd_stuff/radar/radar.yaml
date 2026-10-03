@@ -14,23 +14,22 @@ spec:
     server: https://kubernetes.default.svc   
     namespace: argocd
 
+---
 
-
-# apiVersion: traefik.io/v1alpha1
-# kind: IngressRoute
-# metadata:
-  # name: argocd-server
-  # namespace: argocd
-# spec:
-  # entryPoints:
-    # - websecure
-  # routes:
-    # - kind: Rule
-      # match: Host(`argocd.andreiboghean.com`)
-      # priority: 10
-      # services:
-        # - name: argocd-server
-          # port: 80
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radar-ingress
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`radar.andreiboghean.com`)
+       services:
+        - name: argocd-server
+          port: 9280
     # - kind: Rule
       # match: Host(`argocd.andreiboghean.com`) && Header(`Content-Type`, `application/grpc`)
       # priority: 11
@@ -38,5 +37,5 @@ spec:
         # - name: argocd-server
           # port: 80
           # scheme: h2c
-  # tls:
-    # certResolver: default
+  tls:
+    certResolver: default
