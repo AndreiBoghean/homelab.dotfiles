@@ -1,5 +1,5 @@
 {
-  description = "Isolated Homelab Configurations Flake";
+  description = "modules aggregator";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
@@ -7,7 +7,7 @@
 
   outputs = { self, nixpkgs, ... }: {
     system = "x86_64-linux";
-    nixosModules.homelab = { pkgs, lib, ... }: {
+    nixosModules.modules = { pkgs, lib, ... }: {
       imports = [
         ./kubernetes.nix
         ./testFile.nix

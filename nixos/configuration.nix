@@ -77,7 +77,16 @@
   #  wget
   ];
 
-  nix.nixPath = [ "nixos-config=/homelab/nixos/configuration.nix" ];
+  # nix.nixPath = [ "nixos-config=/homelab/nixos/configuration.nix" ];
+  # nix.nixPath = [ "nixos-config=/homelab/nixos/flake.nix" ];
+  nix.nixPath = [
+    "nixos-config=/homelab/nixos/flake.nix"
+    # "nixos-config=/homelab/nixos/configuration.nix"
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
+
+  nix.channel.enable = false;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
