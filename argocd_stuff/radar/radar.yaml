@@ -11,7 +11,7 @@ spec:
     chart: radar
   destination:
     server: https://kubernetes.default.svc   
-    namespace: argocd
+    namespace: radar
 
 ---
 
@@ -19,7 +19,7 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: radar-ingress
-  namespace: argocd
+  namespace: radar
 spec:
   entryPoints:
     - websecure
