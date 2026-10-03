@@ -27,7 +27,7 @@ spec:
     - kind: Rule
       match: Host(`radar.andreiboghean.com`)
       services:
-        - name: argocd-server
+        - name: radar
           port: 9280
   tls:
     certResolver: default
