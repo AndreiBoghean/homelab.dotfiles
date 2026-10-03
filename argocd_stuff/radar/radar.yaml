@@ -7,6 +7,7 @@ spec:
     default
   source:
     repoURL: https://skyhook-io.github.io/helm-charts
+    targetRevision: 1.15.0
     chart: radar
   destination:
     server: https://kubernetes.default.svc   
