@@ -12,6 +12,9 @@ spec:
   destination:
     server: https://kubernetes.default.svc   
     namespace: radar
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
 
 ---
 
