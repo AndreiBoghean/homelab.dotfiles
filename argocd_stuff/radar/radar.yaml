@@ -3,10 +3,13 @@ kind: Application
 metadata:
   name: radar
 spec:
+  project:
+    default
   source:
     repoURL: https://skyhook-io.github.io/helm-charts
     chart: radar
-
+  destination:
+    server: https://kubernetes.default.svc   
 
 
 
