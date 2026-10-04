@@ -5,5 +5,6 @@
     vim
     tmux
     git
+    parted
   ];
 }
