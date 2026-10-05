@@ -1,0 +1,5 @@
+config:
+  server:
+    port: 8080                              # port to listen on (default rn)
+    sources:                                #  validate:required,dive
+      - path: /mnt/5TB_main                 # file system path. (Can be relative)  validate:required
