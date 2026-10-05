@@ -10,8 +10,25 @@ spec:
     targetRevision: 1.5.3-stable-2
     chart: filebrowser
     helm:
-      valueFiles:
-      - values.yaml
+      # valueFiles:
+      # - values.yaml
+      valuesObject:
+        persistence:
+          enabled: true
+          keep: true
+          # Global defaults - used if per-PVC settings are not specified
+          storageClass: fbqt-manual
+          accessMode: ReadWriteOnce
+          # below: Per-PVC configuration - override global defaults as needed
+          data:
+            size: 8Gi
+          config:
+            size: 5000G
+        config:
+          server:
+            port: 8080                      # port to listen on (default rn)
+            # sources:                      #  validate:required,dive
+              # - path: /mnt/5TB_main       # file system path. (Can be relative)  validate:required
   destination:
     server: https://kubernetes.default.svc   
     namespace: filebrowser-quantum
