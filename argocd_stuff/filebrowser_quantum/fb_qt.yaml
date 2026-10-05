@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://skyhook-io.github.io/helm-charts
+    repoURL: oci://ghcr.io/softwaredam/helm-charts/filebrowser-quantum
     targetRevision: v1.5.3-stable-2
     chart: filebrowser
     helm:
