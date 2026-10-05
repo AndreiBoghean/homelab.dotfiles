@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nxtcld
+  name: nextcloud
   namespace: argocd
 spec:
   project: default
@@ -53,7 +53,7 @@ spec:
     - kind: Rule
       match: Host(`nextcloud.andreiboghean.com`)
       services:
-        - name: nextcloud
+        - name: nxtcld-nextcloud
           port: 8080
   tls:
     certResolver: default
