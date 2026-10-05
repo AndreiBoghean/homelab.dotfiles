@@ -111,7 +111,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: 5tb-pv
+  name: nxtcld-5tb-pv
 spec:
   storageClassName: nxtcld-manual
   capacity:
@@ -164,7 +164,7 @@ metadata:
   namespace: nextcloud
 spec:
   storageClassName: nxtcld-manual
-  volumeName: 5tb-pv
+  volumeName: nxtcld-5tb-pv
   accessModes:
     - ReadWriteOnce
   resources:
