@@ -53,7 +53,7 @@ spec:
     - kind: Rule
       match: Host(`nextcloud.andreiboghean.com`)
       services:
-        - name: nxtcld-nextcloud
+        - name: nextcloud
           port: 8080
   tls:
     certResolver: default
