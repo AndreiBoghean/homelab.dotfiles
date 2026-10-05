@@ -1,0 +1,172 @@
+# ########################################################## MAIN APPLICATION
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nxtcld
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://nextcloud.github.io/helm/
+    targetRevision: 9.4.0
+    chart: nextcloud
+    helm:
+      valuesObject:
+        persistence:
+          enabled: true
+          existingClaim: nxtcld-config
+          # storageClass: nxtcld-manual
+          # accessMode: ReadWriteOnce
+          # size: 8Gi
+          nextcloudData:
+            enabled: true
+            existingClaim: nxtcld-data
+        nextcloud:
+          host: nextcloud.andreiboghean.com
+          extraVolumes:
+            - name: 5tb-volume
+              persistentVolumeClaim:
+                claimName: 5tb-pvc
+          extraVolumeMounts:
+            - name: 5tb-volume
+              mountPath: /mnt/5tb-mount
+              readOnly: false
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: nextcloud
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+---
+# ########################################################## INGRESS ROUTE
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nextcloud-ingress
+  namespace: nextcloud
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`nextcloud.andreiboghean.com`)
+      services:
+        - name: nextcloud
+          port: 8080
+  tls:
+    certResolver: default
+
+---
+# ########################################################## PERSISTENT VOLUMES x3
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nxtcld-config
+spec:
+  storageClassName: nxtcld-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/nxtcld
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nxtcld-data
+spec:
+  storageClassName: nxtcld-manual
+  capacity:
+    storage: 50Gi # temporary... when we add the redundant 3TB, this gets moved there.
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/nxtcldD
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: 5tb-pv
+spec:
+  storageClassName: nxtcld-manual
+  capacity:
+    storage: 5000G
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/5TB_main
+
+---
+# ########################################################## PERSISTENT VOLUME CLAIMS x3
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nxtcld-config
+  namespace: nextcloud
+spec:
+  storageClassName: nxtcld-manual
+  volumeName: nxtcld-config
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nxtcld-data
+  namespace: nextcloud
+spec:
+  storageClassName: nxtcld-manual
+  volumeName: nxtcld-data
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: 5tb-pvc
+  namespace: nextcloud
+spec:
+  storageClassName: nxtcld-manual
+  volumeName: 5tb-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5000G
