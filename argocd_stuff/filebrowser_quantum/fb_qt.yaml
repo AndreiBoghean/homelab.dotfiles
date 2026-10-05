@@ -53,6 +53,14 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   local:
     path: /mnt/kubePVs
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
 
 ---
 
@@ -69,3 +77,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: "/mnt/5TB_main"
+
