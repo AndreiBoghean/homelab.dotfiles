@@ -10,6 +10,10 @@ spec:
     repoURL: https://skyhook-io.github.io/helm-charts
     targetRevision: 1.15.0
     chart: radar
+    helm:
+      valuesObject:
+        rbac:
+          secrets: true
   destination:
     server: https://kubernetes.default.svc   
     namespace: radar
