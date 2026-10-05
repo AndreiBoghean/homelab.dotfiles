@@ -38,4 +38,34 @@ spec:
   tls:
     certResolver: default
 
+---
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fbqt-config
+spec:
+  storageClassName: fbqt-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: 5tb-pv
+spec:
+  storageClassName: fbqt-manual
+  capacity:
+    storage: 5000G
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/5TB_main"
