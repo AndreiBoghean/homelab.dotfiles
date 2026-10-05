@@ -21,9 +21,9 @@ spec:
           accessMode: ReadWriteOnce
           # below: Per-PVC configuration - override global defaults as needed
           data:
-            size: 8Gi
-          config:
             size: 5000G
+          config:
+            size: 8Gi
         config:
           server:
             port: 8080                      # port to listen on (default rn)
