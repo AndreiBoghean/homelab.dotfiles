@@ -135,6 +135,7 @@ spec:
   volumeName: nxtcld-config
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: 8Gi
@@ -151,6 +152,7 @@ spec:
   volumeName: nxtcld-data
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: 50Gi
@@ -167,6 +169,7 @@ spec:
   volumeName: nxtcld-5tb-pv
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: 5000G
