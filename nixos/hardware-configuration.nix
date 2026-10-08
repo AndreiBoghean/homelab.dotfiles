@@ -18,6 +18,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/mnt/5TB_main" =
+    { device = "/dev/disk/by-uuid/b1e1ba0f-8f35-46dd-9e68-5346a83dd510";
+      fsType = "ext4";
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/50F4-BE4A";
       fsType = "vfat";
