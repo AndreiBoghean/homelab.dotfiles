@@ -32,8 +32,8 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: radar-ingress
-  namespace: radar
+  name: technitium-ingress
+  namespace: technitium
 spec:
   entryPoints:
     - websecure
