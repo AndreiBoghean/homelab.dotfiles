@@ -16,7 +16,8 @@ spec:
           config:
             enabled: true
             size: 8Gi
-            type: ReadWriteOnce
+            type: pvc
+            accessMode: ReadWriteOnce
             storageClass: technitium-manual
             retain: true
   destination:
