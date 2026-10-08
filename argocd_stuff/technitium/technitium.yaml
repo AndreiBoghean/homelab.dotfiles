@@ -23,6 +23,11 @@ spec:
         service:
           main:
             type: ClusterIP # Leave the main Service for traefik
+            ports:
+             dns-tcp:
+               enabled: false
+             dns-udp:
+               enabled: false
           dns:
             enabled: true
             primary: false
