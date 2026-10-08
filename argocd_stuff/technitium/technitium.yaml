@@ -10,8 +10,10 @@ spec:
     repoURL: https://charts.obeone.cloud
     targetRevision: 1.13.3
     chart: technitium-dnsserver
+    # helm:
+    #   valuesObject:
     helm:
-      valuesObject:
+      values: |
         persistence:
           config:
             enabled: true
