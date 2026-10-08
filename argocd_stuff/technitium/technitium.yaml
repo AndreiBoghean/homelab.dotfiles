@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     repoURL: https://charts.obeone.cloud
-    targetRevision: 15.6.0
+    targetRevision: 1.13.3
     chart: technitium-dnsserver
     helm:
       valuesObject:
