@@ -42,8 +42,8 @@ spec:
     - kind: Rule
       match: Host(`technitium.andreiboghean.com`)
       services:
-        - name: dns-server
-          port: 53
+        - name: technitium-dns-technitium-dnsserver
+          port: 80
   tls:
     certResolver: default
 
