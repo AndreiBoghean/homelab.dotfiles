@@ -1,0 +1,72 @@
+# ########################################################## MAIN APP
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: technitium-dns
+  namespace: technitium
+spec:
+  project: default
+  source:
+    repoURL: https://charts.obeone.cloud
+    targetRevision: 1.13.3
+    chart: technitium
+    helm:
+      valuesObject:
+        persistence:
+          config:
+            enabled: true
+            size: 8Gi
+            type: ReadWriteOnce
+            storageClass: technitium-manual
+            retain: true
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: technitium
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+---
+# ########################################################## INGRESS ROUTE
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radar-ingress
+  namespace: radar
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`technitium.andreiboghean.com`)
+      services:
+        - name: dns-server
+          port: 53
+  tls:
+    certResolver: default
+
+---
+# ########################################################## PERSISTENT VOLUME
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: technitium-config
+spec:
+  storageClassName: technitium-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/technitium
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
