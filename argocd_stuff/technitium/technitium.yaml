@@ -54,7 +54,7 @@ spec:
       - CreateNamespace=true
 
 ---
-# ########################################################## INGRESS ROUTE
+# ########################################################## INGRESS ROUTES
 
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -70,8 +70,15 @@ spec:
       services:
         - name: technitium-dns-technitium-dnsserver
           port: 80
+#     I've decided I dont actually care about setting up DOH
+#     - kind: Rule
+#       match: Host(`technitium.andreiboghean.com`) && Path(`/dns-query`)
+#       services:
+#         - name: technitium-dns-technitium-dnsserver
+#           port: 8053
   tls:
     certResolver: default
+
 
 ---
 # ########################################################## PERSISTENT VOLUME
