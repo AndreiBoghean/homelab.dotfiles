@@ -5,6 +5,6 @@
     vim
     tmux
     git
-    parted
+    rsync
   ];
 }
