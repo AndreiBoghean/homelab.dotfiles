@@ -33,18 +33,17 @@ spec:
                 port: 53
                 targetPort: 53
                 protocol: TCP
-      
               dns-udp:
                 enabled: true
                 port: 53
                 targetPort: 53
                 protocol: UDP
-        destination:
-          server: https://kubernetes.default.svc   
-          namespace: technitium
-        syncPolicy:
-          syncOptions:
-            - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: technitium
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
 
 ---
 # ########################################################## INGRESS ROUTE
