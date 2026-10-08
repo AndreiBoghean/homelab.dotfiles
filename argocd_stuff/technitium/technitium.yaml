@@ -23,6 +23,7 @@ spec:
         service:
           main:
             type: ClusterIP # Leave the main Service for traefik
+            externalTrafficPolicy: null
             ports:
              dns-tcp:
                enabled: false
