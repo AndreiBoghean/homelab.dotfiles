@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fbqt
+  name: filebrowser-quantum
   namespace: argocd
 spec:
   project: default
@@ -50,7 +50,7 @@ spec:
     - kind: Rule
       match: Host(`fbqt.andreiboghean.com`)
       services:
-        - name: fbqt-filebrowser-quantum
+        - name: filebrowser-quantum-filebrowser-quantum
           port: 8080
   tls:
     certResolver: default
@@ -94,4 +94,3 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: "/mnt/5TB_main"
-
