@@ -14,12 +14,12 @@ spec:
         persistence:
           config:
             enabled: true
+            size: 8Gi
+            storageClass: 'stackarr-qbittorrent-manual'
+          downloads:
+            enabled: true
             size: 128Gi
             storageClass: 'stackarr-qbittorrent-manual'
-    #       media:
-    #         enabled: true
-    #         size: 3000G
-    #         storageClass: 'stackarr-jellyfin-manual'
           
   destination:
     server: https://kubernetes.default.svc   
@@ -56,12 +56,36 @@ metadata:
 spec:
   storageClassName: stackarr-qbittorrent-manual
   capacity:
-    storage: 128Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   local:
     path: /mnt/kubePVs/stackarr/qbittorrent
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-qbittorrent-downloads
+spec:
+  storageClassName: stackarr-qbittorrent-manual
+  capacity:
+    storage: 128Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/stackarr/ingestable_tents
   nodeAffinity:
     required:
       nodeSelectorTerms:
