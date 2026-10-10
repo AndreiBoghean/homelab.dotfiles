@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nesting-test
+  name: nesting-test-first
   namespace: test
 spec:
   replicas: 1
@@ -55,7 +55,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nesting-test
+  name: nesting-test-second
   namespace: test
 spec:
   replicas: 1
