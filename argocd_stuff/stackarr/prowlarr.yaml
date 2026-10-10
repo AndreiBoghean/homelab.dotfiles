@@ -9,17 +9,17 @@ spec:
     repoURL: https://charts.pree.dev
     targetRevision: 1.60.0
     chart: prowlarr
-    # helm:
-    #   valuesObject:
-    #     persistence:
-    #       config:
-    #         enabled: true
-    #         size: 8Gi
-    #         storageClass: 'stackarr-jellyfin-manual'
-    #       media:
-    #         enabled: true
-    #         size: 3000G
-    #         storageClass: 'stackarr-jellyfin-manual'
+    helm:
+      valuesObject:
+        persistence:
+          config:
+            enabled: true
+            size: 8Gi
+            storageClass: 'stackarr-prowlarr-manual'
+          # media:
+          #   enabled: true
+          #   size: 3000G
+          #   storageClass: 'stackarr-jellyfin-manual'
           
   destination:
     server: https://kubernetes.default.svc   
@@ -47,29 +47,29 @@ spec:
   tls:
     certResolver: default
 
-# ---
-# 
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: stackarr-jellyfin-config
-# spec:
-#   storageClassName: stackarr-jellyfin-manual
-#   capacity:
-#     storage: 8Gi
-#   accessModes:
-#     - ReadWriteOnce
-#   persistentVolumeReclaimPolicy: Retain
-#   local:
-#     path: /mnt/kubePVs/stackarr/jellyfin
-#   nodeAffinity:
-#     required:
-#       nodeSelectorTerms:
-#         - matchExpressions:
-#             - key: kubernetes.io/hostname
-#               operator: In
-#               values:
-#                 - nixos-server
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-prowlarr-config
+spec:
+  storageClassName: stackarr-prowlarr-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/stackarr/prowlarr
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
 # 
 # ---
 # 
