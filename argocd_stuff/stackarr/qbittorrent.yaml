@@ -20,6 +20,7 @@ spec:
             enabled: true
             size: 128Gi
             storageClass: 'stackarr-qbittorrent-manual'
+            accessMode: ReadWriteOnce
           
   destination:
     server: https://kubernetes.default.svc   
