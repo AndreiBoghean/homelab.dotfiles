@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stackarr-jellyfin
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://jellyfin.github.io/jellyfin-helm
+    targetRevision: 3.2.0
+    chart: jellyfin
+    helm:
+      valuesObject:
+        persistence:
+          config:
+            enabled: true
+            size: 8Gi
+            storageClass: 'stackarr-jellyfin-manual'
+          media:
+            enabled: true
+            size: 3000G
+            storageClass: 'stackarr-jellyfin-manual'
+          
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: stackarr
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stackarr-jellyfin-ingress
+  namespace: stackarr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`jellyfin.andreiboghean.com`)
+      services:
+        - name: jellyfin
+          port: 8096
+  tls:
+    certResolver: default
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-jellyfin-config
+spec:
+  storageClassName: stackarr-jellyfin-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/stackarr/jellyfin
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-jellyfin-media-pv
+spec:
+  storageClassName: stackarr-jellyfin-manual
+  capacity:
+    storage: 3000G
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/5TB_main/media"
