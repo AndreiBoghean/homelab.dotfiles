@@ -70,19 +70,3 @@ spec:
               operator: In
               values:
                 - nixos-server
-
----
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: stackarr-jellyfin-media-pv
-spec:
-  storageClassName: stackarr-jellyfin-manual
-  capacity:
-    storage: 3000G
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: "/mnt/5TB_main/media"
