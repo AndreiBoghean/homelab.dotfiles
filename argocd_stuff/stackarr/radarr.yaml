@@ -20,6 +20,7 @@ spec:
             enabled: true
             size: 3000G
             storageClass: 'stackarr-radarr-manual'
+            accessMode: ReadWriteOnce
           
   destination:
     server: https://kubernetes.default.svc   
