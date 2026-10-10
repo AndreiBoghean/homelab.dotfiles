@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stackarr-radarr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.pree.dev
+    targetRevision: 1.34.0
+    chart: radarr
+    helm:
+      valuesObject:
+        persistence:
+          config:
+            enabled: true
+            size: 8Gi
+            storageClass: 'stackarr-radarr-manual'
+          media:
+            enabled: true
+            size: 3000G
+            storageClass: 'stackarr-radarr-manual'
+          
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: stackarr
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stackarr-radarr-ingress
+  namespace: stackarr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`radarr.andreiboghean.com`)
+      services:
+        - name: stackarr-radarr
+          port: 7878
+  tls:
+    certResolver: default
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-radarr-config
+spec:
+  storageClassName: stackarr-radarr-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/stackarr/radarr
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-radarr-media-pv
+spec:
+  storageClassName: stackarr-radarr-manual
+  capacity:
+    storage: 3000G
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/5TB_main/media"
