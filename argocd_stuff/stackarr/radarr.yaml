@@ -21,7 +21,7 @@ spec:
             size: 3000G
             storageClass: 'stackarr-radarr-manual'
             accessMode: ReadWriteOnce
-          ingestableTents:
+          ingestabletents:
             enabled: true
             size: 128Gi
             storageClass: 'stackarr-radarr-manual'
