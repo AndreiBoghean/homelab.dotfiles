@@ -86,7 +86,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   local:
-    path: /mnt/kubePVs/stackarr/ingestable_tents
+    path: /mnt/kubePVs/stackarr/ingestable-tents
   nodeAffinity:
     required:
       nodeSelectorTerms:

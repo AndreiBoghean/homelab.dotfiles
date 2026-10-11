@@ -21,7 +21,7 @@ spec:
             size: 3000G
             storageClass: 'stackarr-radarr-manual'
             accessMode: ReadWriteOnce
-          ingestable_tents:
+          ingestableTents:
             enabled: true
             size: 128Gi
             storageClass: 'stackarr-radarr-manual'
@@ -108,7 +108,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   local:
-    path: /mnt/kubePVs/stackarr/ingestable_tents
+    path: /mnt/kubePVs/stackarr/ingestable-tents
   nodeAffinity:
     required:
       nodeSelectorTerms:
