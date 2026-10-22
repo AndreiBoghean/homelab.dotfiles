@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  andreiboghean.server: |
+    andreiboghean.com:53 {
+        errors
+        cache 30
+        andreiboghean.com {
+            errors
+            cache 30
+            forward . 192.168.0.180 1.1.1.1 {
+                policy sequential
+            }
+        }
+    }
