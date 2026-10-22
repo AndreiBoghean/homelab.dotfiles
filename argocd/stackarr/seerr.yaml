@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stackarr-seerr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: oci://ghcr.io/seerr-team/seerr/seerr-chart
+    targetRevision: 3.2.0
+    chart: seerr
+    helm:
+      valuesObject:
+        config:
+          persistence:
+            size: 8Gi
+            storageClass: 'stackarr-seerr-manual'
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: stackarr
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stackarr-seerr-ingress
+  namespace: stackarr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`seerr.andreiboghean.com`)
+      services:
+        - name: seerr
+          port: 80
+  tls:
+    certResolver: default
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stackarr-seerr-config
+spec:
+  storageClassName: stackarr-seerr-manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /mnt/kubePVs/stackarr/seerr
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - nixos-server
