@@ -50,7 +50,7 @@ spec:
       match: Host(`sonarr.andreiboghean.com`)
       services:
         - name: stackarr-sonarr
-          port: 7878
+          port: 8989
   tls:
     certResolver: default
 
