@@ -36,7 +36,7 @@ spec:
     - kind: Rule
       match: Host(`seerr.andreiboghean.com`)
       services:
-        - name: seerr
+        - name: stackarr-seerr-seerr-chart
           port: 80
   tls:
     certResolver: default
