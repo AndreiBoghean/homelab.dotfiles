@@ -83,9 +83,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: stackarr-radarr-media-pv
+  name: stackarr-sonarr-media-pv
 spec:
-  storageClassName: stackarr-radarr-manual
+  storageClassName: stackarr-sonarr-manual
   capacity:
     storage: 3000G
   accessModes:
@@ -99,9 +99,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: stackarr-radarr-downloads
+  name: stackarr-sonarr-downloads
 spec:
-  storageClassName: stackarr-radarr-manual
+  storageClassName: stackarr-sonarr-manual
   capacity:
     storage: 128Gi
   accessModes:
