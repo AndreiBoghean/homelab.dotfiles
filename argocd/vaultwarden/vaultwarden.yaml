@@ -33,6 +33,7 @@ metadata:
 spec:
   entryPoints:
     - websecure
+    - interwebsecure
   routes:
     - kind: Rule
       match: Host(`vaultwarden.andreiboghean.com`)
