@@ -14,6 +14,15 @@ spec:
       valuesObject:
         rbac:
           secrets: true
+        auth:
+          mode: oidc
+          oidc:
+            issuerURL: https://accounts.google.com    # Your OIDC provider
+            clientID: 36006840049-cnuenfk48sjdcsh1rae1go3p9vmnjdi8.apps.googleusercontent.com
+            clientSecret: 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 # shh I know I'm committing private secrets to a public git... this is only temporary I swear :)
+            redirectURL: https://radar.andreiboghean.com/auth/callback
+            groupsClaim: groups                        # JWT claim containing group membership
+            scopes: ["openid", "profile", "email"]
   destination:
     server: https://kubernetes.default.svc   
     namespace: radar
