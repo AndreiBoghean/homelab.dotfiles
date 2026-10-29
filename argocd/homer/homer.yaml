@@ -7,8 +7,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://zekker6.github.io/helm-charts/
-    targetRevision: 8.35.0
+    # repoURL: https://zekker6.github.io/helm-charts/
+    repoURL: https://charts.gabe565.com
+    targetRevision: 0.13.0
     chart: homer
 #     helm:
 #       valuesObject:
