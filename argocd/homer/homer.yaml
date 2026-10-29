@@ -15,7 +15,7 @@ spec:
         configmap:
           config:
             data:
-              config.yml: |
+              config.yml: |-
                 title: "SERVERERERERERER OVERVIEW!! :D"
                 subtitle: "Homer"
                 logo: "logo.png"
