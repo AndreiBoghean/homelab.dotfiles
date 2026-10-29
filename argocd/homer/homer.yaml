@@ -89,25 +89,29 @@ spec:
                   - name: "Applications/Services"
                     icon: "fas fa-cloud"
                     items:
-                      - name: "QbitTorrent"
-                        subtitle: "you know what this is for."
-                        url: "https://qbittorrent.andreiboghean.com"
+                      # - name: "QbitTorrent"
+                      #   subtitle: "you know what this is for."
+                      #   url: "https://qbittorrent.andreiboghean.com"
 
-                      - name: "home speed test telemetry"
-                        subtitle: "use email \"guest@guest.guest\" and pass \"guest\" to get in."
-                        url: "https://speedtest.andreiboghean.com"
+                      # - name: "home speed test telemetry"
+                      #   subtitle: "use email \"guest@guest.guest\" and pass \"guest\" to get in."
+                      #   url: "https://speedtest.andreiboghean.com"
 
-                      - name: "trueNAS admin panel"
-                        subtitle: "title says it all."
-                        url: "https://trueNAS.andreiboghean.com"
+                      # - name: "trueNAS admin panel"
+                      #   subtitle: "title says it all."
+                      #   url: "https://trueNAS.andreiboghean.com"
 
-                      - name: "nginx proxy manager"
-                        subtitle: "title says it all."
-                        url: "https://proxyManager.andreiboghean.com"
+                      # - name: "nginx proxy manager"
+                      #   subtitle: "title says it all."
+                      #   url: "https://proxyManager.andreiboghean.com"
 
                       - name: "nextcloud"
                         subtitle: "self-hosted google cloud alternative"
                         url: "https://nextcloud.andreiboghean.com"
+
+                      - name: "vaultwarden"
+                        subtitle: "bitwarden, but a rust implementation which is speeeed"
+                        url: "https://vaultwarden.andreiboghean.com"
 
                   - name: "Projects"
                     icon: "fas fa-code"
@@ -117,12 +121,12 @@ spec:
                         subtitle: "group hackathon project for a simple 404 page minigame"
                         url: "https://calumvc.github.io/FreeToFly"
 
-                      - name: "minesweeper"
+                      - name: "(currently DEAD) minesweeper"
                         icon: ""
                         subtitle: "basic minesweeper game with backend playthrough recording for analysis as an MSci project"
                         url: "https://minesweeper.andreiboghean.com"
 
-                      - name: "Course Configurator"
+                      - name: "(currently DEAD) Course Configurator"
                         icon: ""
                         subtitle: "small proj generating combinations of possible timetables from selected courses"
                         url: "https://courseConfig.andreiboghean.com"
