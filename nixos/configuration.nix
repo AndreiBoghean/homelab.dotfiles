@@ -15,6 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   # bootloader kernel params to skip video stuff
   boot.kernelParams = [ "nomodeset" ];
+  boot.swraid.enable = true;
 
   networking.hostName = "nixos-server"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
