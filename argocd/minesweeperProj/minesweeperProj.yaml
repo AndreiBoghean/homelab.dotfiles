@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Deployment
+metadata:
+  name: minesweeperProj
+  namespace: argocd
+spec:
+  project: default
+  replicas: 1
+  selector:
+    matchLabels:
+      app:
+        minesweeperProj-app
+  template:
+    metadata:
+      labels:
+        app: minesweeperProj-app
+    spec:
+      containers:
+      - name: minesweeperProj
+        image: andreiboghean/minesweeper_frontend
+        ports:
+        - containerPort: 80
+
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: minesweeperProj
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: minesweeperproj-ingress
+  namespace: filebrowser-quantum
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`minesweeper.andreiboghean.com`)
+      services:
+        - name: minesweeperProj
+          port: 80
+  tls:
+    certResolver: default
