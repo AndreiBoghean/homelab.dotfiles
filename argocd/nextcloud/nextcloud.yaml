@@ -21,6 +21,8 @@ spec:
           nextcloudData:
             enabled: true
             existingClaim: nxtcld-data
+        phpClientHttpsFix:
+          enabled: true
         nextcloud:
           host: nextcloud.andreiboghean.com
           extraVolumes:
